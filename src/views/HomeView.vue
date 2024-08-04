@@ -1,35 +1,33 @@
 <template>
   <div class="conteiner">
     <div class="first__task">
-      <MyButton
-        class="btn-acent" 
-        :class="{ 'btn-active': name === 'one' }"
-        @action="chouse('one')"
+      <MyButton 
+        :class="{ 'btn-active': name === 'StepOne' }"
+        @action="chouse('StepOne')"
       >
         one
       </MyButton>
       <MyButton 
-        class="btn-acent"
-        :class="{ 'btn-active': name === 'two' }" 
-        @action="chouse('two')"
+        :class="{ 'btn-active': name === 'StepTwo' }" 
+        @action="chouse('StepTwo')"
       >
         two
       </MyButton>
       <MyButton 
-        class="btn-acent"
-        :class="{ 'btn-active': name === 'thre' }" 
-        @action="chouse('thre')"
+        :class="{ 'btn-active': name === 'StepThre' }" 
+        @action="chouse('StepThre')"
       >
         thre
       </MyButton>
-      <MyButton 
-        class="btn-acent" 
-        :class="{ 'btn-active': name === 'thour' }"
-        @action = "chouse('thour')"
+      <MyButton  
+        :class="{ 'btn-active': name === 'StepFoure' }"
+        @action = "chouse('StepFoure')"
       >
         четыре
       </MyButton>
     </div>
+    <component :is="ComponentName"></component>
+
   </div>
 
 
@@ -37,29 +35,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import MyButton from '@/components/my-btn.vue';
 import StepOne from '@/components/steps/step-one.vue';
-import StepTwo from '@/components/steps/step-two.vue'
-import Stepthre from '@/components/steps/step-three.vue'
-import StepFoure from '@/components/steps/step-foure.vue'
+import StepTwo from '@/components/steps/step-two.vue';
+import StepThre from '@/components/steps/step-thre.vue';
+import StepFoure from '@/components/steps/step-foure.vue';  
 
 export default defineComponent({
   components: {
-    MyButton
+    MyButton,
+    StepOne,
+    StepTwo,
+    StepThre,
+    StepFoure
   },
   setup() {
 
-    const name = ref<string>('');
+    const name = ref<string>('StepOne');
 
     function chouse(text: string) {
       name.value = text;
-      console.log(text)
     }
-
+    const ComponentName = computed(() => {
+      return name.value
+    });
     return {
       name,
-      chouse
+      chouse,
+      ComponentName
     };
   }
 });
@@ -78,33 +82,5 @@ export default defineComponent({
 
 }
 
-.btn-active
-{
-  cursor: pointer;
-  background-color: #4ed421;
-  color: white;
-  border: 1px solid #297410;
-  &:hover
-  {
-    padding: 10px;
-    background-color: white;
-    border: 1px solid #4ed421;
-    border-radius: 16px;
-    color: black;
-  }
-}
-.btn-acent
-{
-  padding: 10px;
-  background-color: white;
-  border: 1px solid #4ed421;
-  border-radius: 16px;
-  &:hover
-  {
-    cursor: pointer;
-    background-color: #4ed421;
-    color: white;
-    border: 1px solid #297410;
-  }
-}
+
 </style>
