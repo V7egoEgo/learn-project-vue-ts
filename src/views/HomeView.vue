@@ -1,41 +1,60 @@
 <template>
   <div class="conteiner">
     <div class="first__task">
-      <button class="btn-acent" :class="{ 'btn-active': name === 'one' }" @click="chouse('one')">one</button>
-      <button class="btn-acent" :class="{ 'btn-active': name === 'two' }" @click="chouse('two')">two</button>
-      <button class="btn-acent" :class="{ 'btn-active': name === 'thre' }" @click="chouse('thre')">thre</button>
-      <button class="btn-acent" :class="{ 'btn-active': name === 'thour' }" @click="chouse('thour')">thour</button>
+      <MyButton
+        class="btn-acent" 
+        :class="{ 'btn-active': name === 'one' }"
+        @action="chouse('one')"
+      >
+        one
+      </MyButton>
+      <MyButton 
+        class="btn-acent"
+        :class="{ 'btn-active': name === 'two' }" 
+        @action="chouse('two')"
+      >
+        two
+      </MyButton>
+      <MyButton 
+        class="btn-acent"
+        :class="{ 'btn-active': name === 'thre' }" 
+        @action="chouse('thre')"
+      >
+        thre
+      </MyButton>
+      <MyButton 
+        class="btn-acent" 
+        :class="{ 'btn-active': name === 'thour' }"
+        @action = "chouse('thour')"
+      >
+        четыре
+      </MyButton>
     </div>
   </div>
-  <div v-if="name === 'one'" >
-    <h2>first block</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio assumenda fugit corrupti fuga, laboriosam soluta laudantium, quidem consequatur sit doloribus, ex omnis veniam? Sed praesentium officia asperiores deleniti mollitia.</p>
-  </div>
-  <div v-if="name === 'two'">
-    <h2>two block</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio assumenda fugit corrupti fuga, laboriosam soluta laudantium, quidem consequatur sit doloribus, ex omnis veniam? Sed praesentium officia asperiores deleniti mollitia.</p>
-  </div>
-  <div v-if="name === 'thre'">
-    <h2>foure block</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio assumenda fugit corrupti fuga, laboriosam soluta laudantium, quidem consequatur sit doloribus, ex omnis veniam? Sed praesentium officia asperiores deleniti mollitia.</p>
-  </div>
-  <div v-if="name === 'thour'">
-    <h2>five block</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit distinctio assumenda fugit corrupti fuga, laboriosam soluta laudantium, quidem consequatur sit doloribus, ex omnis veniam? Sed praesentium officia asperiores deleniti mollitia.</p>
-  </div>
+
+
 
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import MyButton from '@/components/my-btn.vue';
+import StepOne from '@/components/steps/step-one.vue';
+import StepTwo from '@/components/steps/step-two.vue'
+import Stepthre from '@/components/steps/step-three.vue'
+import StepFoure from '@/components/steps/step-foure.vue'
 
 export default defineComponent({
+  components: {
+    MyButton
+  },
   setup() {
+
     const name = ref<string>('');
 
     function chouse(text: string) {
       name.value = text;
-      console.log(text);
+      console.log(text)
     }
 
     return {
@@ -58,20 +77,7 @@ export default defineComponent({
   width: 600px;
 
 }
-.btn-acent
-{
-  padding: 10px;
-  background-color: white;
-  border: 1px solid #4ed421;
-  border-radius: 16px;
-  &:hover
-  {
-    cursor: pointer;
-    background-color: #4ed421;
-    color: white;
-    border: 1px solid #297410;
-  }
-}
+
 .btn-active
 {
   cursor: pointer;
@@ -85,6 +91,20 @@ export default defineComponent({
     border: 1px solid #4ed421;
     border-radius: 16px;
     color: black;
+  }
+}
+.btn-acent
+{
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #4ed421;
+  border-radius: 16px;
+  &:hover
+  {
+    cursor: pointer;
+    background-color: #4ed421;
+    color: white;
+    border: 1px solid #297410;
   }
 }
 </style>
