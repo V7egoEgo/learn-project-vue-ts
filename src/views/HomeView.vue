@@ -8,6 +8,7 @@
         one
       </MyButton>
       <MyButton 
+        ref="myBtn"
         :class="{ 'btn-active': name === 'StepTwo' }" 
         @action="chouse('StepTwo')"
       >
@@ -26,7 +27,9 @@
         четыре
       </MyButton>
     </div>
-    <component :is="ComponentName"></component>
+    <keep-alive>
+      <component :is="ComponentName"></component> 
+    </keep-alive>
 
   </div>
 
@@ -51,11 +54,11 @@ export default defineComponent({
     StepFoure
   },
   setup() {
-
+    const myBtn = ref<HTMLElement | null>()
     const name = ref<string>('StepOne');
 
-    function chouse(text: string) {
-      name.value = text;
+    function chouse(step: string) {
+      name.value = step;
     }
     const ComponentName = computed(() => {
       return name.value
